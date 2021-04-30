@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 14,
-  "iteration": 1619790274224,
+  "iteration": 1619790274228,
   "links": [],
   "panels": [
     {
@@ -198,7 +198,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_1\"}[1m])))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"}) by (cpu))",
+          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"} offset $offset1) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_1\"}[5m] offset $offset1)))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"} offset $offset1) by (cpu))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -208,7 +208,7 @@
         },
         {
           "exemplar": true,
-          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_2\"}[1m])))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\"}) by (cpu))",
+          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\"} offset $offset1) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_2\"}[5m] offset $offset1)))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\"} offset $offset1) by (cpu))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -269,7 +269,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"})",
+          "expr": "sum(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"} offset $offset1)",
           "interval": "",
           "legendFormat": "Exec 1",
           "refId": "A"
@@ -344,7 +344,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_2\"}[1y]))-sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1y])))/sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1y]))*100",
+          "expr": "(sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1)))/sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1))*100",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -478,7 +478,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1h]))\n",
+          "expr": "sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "Time Difference Between Exec UUID 1 and Exec UUID 2",
@@ -543,7 +543,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1y]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1y])))/sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1y]))*100",
+          "expr": "(sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1)))/sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1))*100",
           "interval": "",
           "legendFormat": "Exec UUID 1",
           "refId": "A"
@@ -606,7 +606,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vtgate\"})",
+          "expr": "sum(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vtgate\"} offset $offset1)",
           "hide": false,
           "interval": "",
           "legendFormat": "VTGate",
@@ -614,7 +614,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vttablet\"})",
+          "expr": "sum(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vttablet\"} offset $offset1)",
           "hide": false,
           "interval": "",
           "legendFormat": "VTTablet",
@@ -759,7 +759,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_2\"}[1y]))-sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1y]))",
+          "expr": "sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(node_cpu_seconds_total{mode!=\"idle\",exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -891,7 +891,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\", component=\"vttablet\"}[1y]))-sum(increase(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vttablet\"}[1y]))",
+          "expr": "sum(increase(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_2\", component=\"vttablet\"}[1h]))-sum(increase(process_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\", component=\"vttablet\"}[1h] offset $offset1))",
           "hide": false,
           "interval": "",
           "legendFormat": "Exec UUID 1",
@@ -956,7 +956,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_2\"}[1y]))-sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_1\"}[1y])))/sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_1\"}[1y]))*100",
+          "expr": "(sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1)))/sum(increase(process_cpu_seconds_total{component=\"vttablet\", exec_uuid=\"$exec_uuid_1\"}[1h] offset $offset1))*100",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -1027,7 +1027,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(rate(vtgate_api_count{exec_uuid=\"$exec_uuid_1\"}[1m]))",
+          "expr": "avg(rate(vtgate_api_count{exec_uuid=\"$exec_uuid_1\"}[1m] offset $offset1))",
           "interval": "",
           "legendFormat": "Exec 1 - $exec_uuid_1",
           "refId": "A"
@@ -1132,7 +1132,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(vtgate_queries_processed{exec_uuid=\"$exec_uuid_1\"})",
+          "expr": "sum(vtgate_queries_processed{exec_uuid=\"$exec_uuid_1\"} offset $offset1)",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1262,7 +1262,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "15s",
           "value": "15s"
         },
@@ -1292,5 +1292,5 @@
   "timezone": "",
   "title": "Compare Benchmark",
   "uid": "rDsgp2rMz",
-  "version": 38
+  "version": 39
 }
