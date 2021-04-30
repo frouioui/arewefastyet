@@ -56,3 +56,6 @@ all:
           - dashboard_id: 7362
             revision_id: 5
             datasource: Prometheus
+        grafana_plugins:
+          - autohome-compareQueries-datasource
+          - grafana-meta-queries
