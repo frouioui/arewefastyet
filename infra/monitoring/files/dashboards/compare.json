@@ -16,7 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 14,
-  "iteration": 1619717783441,
+  "iteration": 1619790274224,
   "links": [],
   "panels": [
     {
@@ -66,7 +66,7 @@
       },
       "lines": true,
       "linewidth": 1,
-      "maxDataPoints": 2000,
+      "maxDataPoints": null,
       "nullPointMode": "null",
       "options": {
         "alertThreshold": true
@@ -87,7 +87,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"}) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_1\"}[5m])))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"}) by (cpu))",
+          "expr": "(((count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"} offset $offset1) by (cpu))) - avg(sum by (mode)(irate(node_cpu_seconds_total{mode='idle',exec_uuid=\"$exec_uuid_1\"}[5m] offset $offset1)))) * 100) / count(count(node_cpu_seconds_total{exec_uuid=\"$exec_uuid_1\"} offset $offset1) by (cpu))",
           "interval": "",
           "legendFormat": "Exec 1 - $exec_uuid_1",
           "refId": "A"
@@ -478,7 +478,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1y]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1y]))\n",
+          "expr": "sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_2\"}[1h]))-sum(increase(process_cpu_seconds_total{component=\"vtgate\", exec_uuid=\"$exec_uuid_1\"}[1h]))\n",
           "hide": false,
           "interval": "",
           "legendFormat": "Time Difference Between Exec UUID 1 and Exec UUID 2",
@@ -1259,16 +1259,38 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "15s",
+          "value": "15s"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "label": "Offset 1",
+        "name": "offset1",
+        "options": [
+          {
+            "selected": true,
+            "text": "15s",
+            "value": "15s"
+          }
+        ],
+        "query": "15s",
+        "skipUrlSync": false,
+        "type": "textbox"
       }
     ]
   },
   "time": {
-    "from": "2021-04-28T19:01:04.701Z",
-    "to": "2021-04-28T20:38:58.144Z"
+    "from": "2021-04-28T19:29:15.591Z",
+    "to": "2021-04-28T20:07:01.543Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Compare Benchmark",
   "uid": "rDsgp2rMz",
-  "version": 33
+  "version": 38
 }
