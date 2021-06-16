@@ -8,6 +8,7 @@ Environment="VTROOT={{vitess_root}}"
 Environment="TABLET_TYPE={{ default_tablet_type }}"
 Environment="TABLET_PORT=16001"
 Environment="GRPC_PORT=17001"
+Environment="DRPC_PORT=17011"
 Environment="MYSQL_PORT=18001"
 Environment="EXTRA_VTTABLET_FLAGS=-alsologtostderr"
 
@@ -23,7 +24,7 @@ WorkingDirectory={{vitess_root}}
 User={{vitess_user}}
 ExecStart=/bin/bash -c 'vttablet \
     --tablet_hostname "$(hostname -I | cut -d \" \" -f 1)" \
-    --service_map "grpc-queryservice,grpc-tabletmanager,grpc-updatestream" \
+    --service_map "grpc-queryservice,grpc-tabletmanager,grpc-updatestream,drpc-queryservice" \
     --db-config-app-uname=vt_app \
     --db-config-dba-uname=vt_dba \
     --db-config-filtered-uname=vt_filtered \
@@ -43,6 +44,7 @@ ExecStart=/bin/bash -c 'vttablet \
     --mysqlctl_socket=${VTROOT}/socket/mysqlctl%i.sock \
     --port ${TABLET_PORT} \
     --grpc_port ${GRPC_PORT} \
+    --drpc_port ${DRPC_PORT} \
     --tablet-path ${CELL}-%i \
     --log_dir ${VTROOT}/tmp \
     --topo_implementation ${TOPO_IMPLEMENTATION} \
