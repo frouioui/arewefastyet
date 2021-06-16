@@ -8,7 +8,7 @@ Environment="VTROOT={{vitess_root}}"
 Environment="TABLET_TYPE={{ default_tablet_type }}"
 Environment="TABLET_PORT=16001"
 Environment="GRPC_PORT=17001"
-Environment="DRPC_PORT=17011"
+Environment="DRPC_PORT=1701{{ tablet.id }}"
 Environment="MYSQL_PORT=18001"
 Environment="EXTRA_VTTABLET_FLAGS=-alsologtostderr"
 
